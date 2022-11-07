@@ -1,0 +1,568 @@
+/*reset css*/
+*{
+    padding: 0;
+    margin: 0;
+    box-sizing: border-box;
+}
+#main{
+    overflow: hidden;  /*cách 2 khi fix trên ipad*/
+}
+
+html{ /* định dạng chữ hco cả trang html*/
+    font-family: Arial, Helvetica, sans-serif;
+    scroll-behavior: smooth;
+}
+
+/*
+từ ngoài vào trong 
+từ trên xuống dưới
+từ tổng quan đến chi tiết
+*/
+
+/* trả lời các câu hỏi:
+ vị  trí
+ ktuoc
+ màu sắc
+ kiểu dáng
+*/
+
+ /* các class dùng chung*/
+.clear{
+    clear: both;
+}
+
+.text-white{
+    color: #fff !important;
+}
+.text-center{
+    text-align: center !important;
+}
+.row{/*ở cái buyticket là các cột*/
+    margin-left: -8px;
+    /*thấy ở cái ảnh buytic padding -8 thì đưa vào cột*/
+    margin-right: -8px;
+}
+.row::after{ /*thay thế clear*/
+    content: "";
+    display: block;
+    clear: both;
+}
+.col{
+    float: left;
+    padding-left: 8px;
+    padding-right: 8px;
+    /* min-height: 500px; */
+}
+
+.col-third{ /*thấy cái ảnh ở name với ảnh ở buytick đều có width 33.33*/
+    width: 33.33333333%;
+   
+}
+
+.col-half{
+    width: 50%;
+}
+
+.col-full{
+    width: 100%;
+}
+
+.mt-32{
+    margin-top: 32px;
+}
+
+.mt-8{
+    margin-top: 8px;
+}
+.mt-16{
+    margin-top: 16px;
+}
+
+.btn{
+    color: #fff;
+    background-color: #000;
+    text-decoration: none;
+    padding: 11px 16px;
+    display: inline-block;
+    margin-top: 15px;
+    border: none;/*bỏ cái boder của thẻ chứa send đi input*/
+    text-align: center;
+    appearance: none;
+    -webkit-appearance: none; /*cho trình duyệt safari*/
+}
+.btn:hover{
+    color: #000;
+    background-color: #ccc;
+    cursor: pointer;
+}
+.pull-right{
+    float: right !important;
+}
+/*main*/
+#header{
+    height: 46px;/*kích thước xong*/
+    background-color: #000;/*màu sắc xong*/
+    /*kiểu dáng*/
+    position: fixed;/*cố định header*/
+    top: 0;
+    left: 0;
+    right: 0;
+    z-index: 1;/* khi thêm cái pos của slider thì nó che mất cái tự động chạy của header thêm vào cho chạy được cái header*/
+    /* overflow: hidden;khi ở trạng thái đóng thì nó sẽ ẩn hết đi còn mỗi cái home */
+}
+
+#nav{
+    display: inline-block; /*chỉ bọc hết cái phần chữ more thôi để thêm cái search vào*/
+}
+#nav .subnav{/*bỏ dấu chấm ở đầu phần ul*/
+    list-style-type:none ;
+}
+
+
+#nav> li{/* xét cái màu xám bao quanh hết chữ dưới thẻ more*/
+    display: inline-block;  
+}
+#nav li {
+    /* display: inline-block bỏ cái này đi để cho cái thẻ màu xám nó bao hết cái chữ dưới thể more đưa hết lên 1 hàng còn thằng more vẫn ở trên */
+    position: relative;/*để đưa 3 cái của more xuống cùng với cái nav.subnav thêm pos absolute 170*/
+}
+/*sửa cái tùy chọn ở more (màu sắc chữ)*/
+#nav > li > a{/* lấy trực tiếp thẻ a cấp 1thôi*/
+    color: #fff;/*nó chỉ ăn vào thằng cấp 1 thôi */
+    text-transform: uppercase;/* viết hoa dòng đầu mà c2 ko bị ảnh hưởng*/
+}
+
+#nav li a{ /* css vào all thẻ a trong li của nav*/
+    text-decoration: none; /*bỏ gạch chân mặc định*/
+    line-height: 46px; /* chiều cao bằng header để căn giữa*/
+    /*giờ đến các nút cách nhau mở inspect bấm vào cái nít đầu tiên có cái mũi tên chỉ vào màn hình ấy di chuyển đến cái contact để xem thấy padding 12*24*/
+    /*do có cái line height rồi nên chỉ cần padding cho hai cái tría phải xa nhau ra thôi*/
+    padding: 0 24px;/*trên dưới 0 trái phải 24px*/
+    display:block;/* cho cái mầu xám nó bao cả thẻ a với độ rùng bằng của header*/
+    /* cách 2 là đưa width 100% là ok  */
+}
+/*#nav .subnav li:hover a,*/
+#nav > li:hover > a{/*tạo hiệu ứng khi di chuototj vào*/ /*chỉ tác động vào c1 thôi c2 lạ ko có nên css riêng cho c2 dòng 175*/
+    color: #000;
+    background-color: #ccc;
+}
+
+/*tạo hiệu ứng khi di chuột vào more thì nó ra chữ mầu đen và nền xám
+cách lấy màu chuẩn ấn vào cái cần xem ví dụ contat xong ấn chọn style ở dưới
+ấn tiếp :hov xong tích chọn hover thấy phần css của nó*/ 
+
+/*đặt hover vào thẻ li để khi chuyển sang more để mở nav phụ ko bị đổi*/
+
+/*#nav li:hover a{ ý nghĩa là khi hover vào thẻ li là con của nav thì con của li được hover là thẻ a
+    color: #000;
+    background-color: #ccc;
+   bỏ cái này đi thêm cái #nav > li:hover > a ở trên vào thì sẽ chỉ ảnh hưởng đến cái more
+   khi dchuot vào thì chỉ more xám
+}*/
+
+#nav .subnav{ /*để nav ở đầu cho đỡ trùng nếu sau nầy mà còn thẻ con nữa thì vẫn ok ko bị trùng tên*/
+    min-width: 160px;/*chiều dài cho cái ô subnav*/
+    display: none;/* ẩn đi*/
+    /* ẩn 3 cái lựa chọn của more đi khi này more đã xuống dưới rồi*/
+    /* bỏ cái none ở 2 dòng trên đi nó sẽ hiện ra ko có none nó sẽ đẩy cái more lên trên và hiện 3 cái kia xuống dưới*/
+    /* thấy thẻ more là thẻ cha gắn gốc tọa độ gốc trên bên trái*/
+    position: absolute;
+    /*để đưa 3 cái của more xuống cùng với cái nav.subnav thêm pos absolute cùng với trên cái li pos reltive*/
+    top:100%;
+    left:0;
+    background-color: #fff;/*màu cho cái khi di chuột vào ra ô cửa chọn khi có cái này thì chữ sẽ bị che do chữ cũng mầu trắng*/
+    /*tạo cái bóng đổ cho cái viền trắng khi di chuột vào more*/
+    box-shadow: 0 0 10px rgba(0,0,0,0.3);
+}
+
+ #nav li:hover .subnav{/*di vào nó mở ra xác định di vào li của cha ra ul của subnav  khi di chuột vào li sẽ hover ảnh hưởng lên subnav hiện lên*/
+     display: block; 
+ }  
+
+#nav .subnav a{/* sửa chữ trong cái thẻ con của more*/
+    color: #000;
+    padding: 0 12px;/*chỉnh cái lùi của phần lựa chọn more*/
+    line-height: 38px;
+}
+
+#nav .subnav li:hover{/*khi di chột vào lựa chọn tỏng more thì sẽ ra cái màu xám xung quanh*/
+    color: #000;
+    background-color: #ccc;
+    /* cso thể viết gộp với cái #nav > li:hover > a bằng cách như trên thẻ #nav > li:hover > a cmt*/
+    /* ko hết chiều ngang màu xám đổi dòng 129 từ inlinebl thnahf bl */
+}
+
+#nav .nav-arrow-down{/*kích thước của mũi tên bên cạnh more*/
+    font-size: 14px;
+}
+
+
+/* nếu thêm thế nyaf thì cái icon nó nhyar xuống nên sửa cái dòng 101 */
+#header .mobile-menu-btn,/*cái nít menu ở mobile giống với nút seach*/
+#header .search-btn{
+    float: right; /*đẩy sang phải mất tính kế thừa chiều ngang của block*/
+    padding: 0 21px;
+}
+
+#header .menu-icon,
+#header .search-icon{
+    color: #fff;
+    font-size: 20px;
+    line-height: 46px;
+}
+
+#header .mobile-menu-btn{
+    position: absolute;
+    top: 0;
+    right: 0;
+    /*thêm vào thì mở pc nó có 2 item đè lên nhau--> ẩn nó đi=211*/
+    display: none;
+}
+#header .search-btn:hover {/*di vào hiện đỏ*/
+    background-color: #f44336;
+    cursor: pointer;/*di chuột vào thành hình bàn tay ấn chọn*/
+ }
+
+#header .mobile-menu-btn:hover{
+    background-color: #ccc;  
+}
+
+#header .mobile-menu-btn:hover .menu-icon{/*khi hover thì css lại cái menu icon*/
+    color: #000;
+}
+/* làm cái ẩn hiện ở more 
+nguyên tắc là cứ cho nó hiện đã 
+khi dó hover */
+#slider{
+    position: relative;/*đi với dòng 249*/
+    margin-top: 46px;
+    padding-top: 50%; /* chiều dài bằng 2 lần chiều rộng kể cả khi co nhỏ màn lại*/
+    background: url('/assets/img/slider/chicago.jpg') top center / cover no-repeat;/*viết tắt*/
+    /*url là bg image top center là bg position tiếp đến bg size*/
+    /*khi sai link ảnh thì mở inspa bấm console ra lỗi */
+
+
+}
+
+#slider .text-content{
+    position: absolute;/*nhấc lên 1 nấc so với ảnh*/
+    bottom: 48px;
+    color: #fff;
+    left: 50%;
+    transform: translateX(-50%);/*cách 2 width=100% thay cho 2 dòng hoặc cách 3 right 0 ,left=0 */ 
+    text-align: center;
+}
+
+#slider .text-heading{
+    font-weight: 500;
+    font-size: 24px;
+}
+
+#slider .text-description{
+    font-size: 15px;
+    margin-top: 25px;
+}
+
+
+
+#content .content-section{
+    width: 800px;/*cái này làm cho responsve lỗi khi ở ipad*/
+    max-width: 100%;/*respondsive khi ở x <800 thì là 100% khi mở ipad mini vẫn hở do cái .row -8px ở trên dòng 37 đi tìm row tắt cái mr right đi--> fix */
+    padding: 64px 0 112px;
+            /* trên trái pahir dưới */
+    margin-left: auto;/*căn giữa bằng cách đẩy trái đẩy phải*/
+    margin-right: auto;
+    padding-left: 16px;/*khaongr cách bên trái giữa chữ và mép */
+    padding-right: 16px;/*fix cái ở ipad*/
+}
+
+
+#content .section-heading{
+    text-align: center;/*căn giữa 2 cái chữ the band với we lowve music*/
+    font-size: 30px;
+    font-weight: 500;/*chữ mỏng đi*/
+    letter-spacing: 4px;/*chữ the band cách nhau 4px*//*đẩy chữ cashc nhau xa ra*/
+    
+}
+#content .section-subheading{
+    text-align: center;/*căn giữa 2 cái chữ the band với we lowve music*/
+    font-size: 15px;
+    margin-top: 25px;/*kc giữa the band và welove*/
+    font-style: italic; /*chữ nghiêng*/
+    opacity: 0.6;/*mờ đi giữ lại 0.6 giá trị trong suốt*/
+}   
+
+#content .about-text{
+    margin-top: 25px;
+    font-size: 15px;
+    text-align: justify;/*căn cho đầu dòng và cuối dòng thẳng hàng*/
+    line-height: 1.4;
+}
+
+#content .member-item{
+    float: left; /*đưa 3 ảnh lên gnang*/
+    width: 33.33333%;  /*đưa cái kết thúc của ảnh thứ 3 về thẳng hàng với cái chữ ở trên*/
+    /* có thể dùng hàm calc(100%/3) */
+    text-align: center;
+}
+#content .member-name{
+    font-size: 15px;
+}
+#content .member-list{
+    margin-top:48px;/*thay 48=48-16*/
+}
+
+#content .member-img{
+    width: 154px;
+    border-radius: 4px;
+}
+ 
+#content .section-heading{
+    font-size: 40px;
+    font-weight: 400;
+}
+
+
+/*tour section*/
+.tour-section{
+    background-color: #000;/*nền đen*/
+}
+
+.tickets-list{
+    background-color: #fff;
+    margin-top: 40px;
+    list-style: none;
+}
+
+
+.tickets-list li{/*chiều cao mỗi thẻ li =15px*/
+    color: #757575;
+    font-size: 15px;
+    padding: 12px 16px;/*trên dưới trái phải*/
+     border-bottom: 1px solid #ddd;/*đường kẻ dưới*/ 
+}
+
+
+.tickets-list .sold-out{
+    background-color: #f44336;
+    color: #fff;
+    padding: 3px 4px;
+    margin-left: 16px;
+}
+.tickets-list .quantity{
+    float: right;
+    width: 24px;
+    height: 24px;
+    background-color: #000;
+    color: #fff;
+    border-radius: 50%;
+    text-align: center;
+    line-height: 24px;  /* căn giữa từ trên xuống dưới*/
+    margin-top: -3px;/*phải có float mới dùng*/
+}
+
+.places-list{
+    margin-top: 16px; /*hạ từ 32 xuống 16 r thêm vào class mt16 để khi sang mobile tự đẩy cách nhau 16*/
+    /* margin-left:-8px ;
+    /* margin-right: -8px; */ /* đẩy cái ảnh ra thnawgr với cái trên và sau bỏ đi vì đã có cái class row rồi*/ 
+    /* margin 32px -8px 0 */
+    /* padding-bottom: 48px; bỏ đi ghi vào class chung*/
+}
+
+/* .place-item{
+     padding: 0 8px;bỏ đi do có cái col rồi
+    float: left;  bỏ đi do có cái col rồi
+    width: 33.33333%;bỏ nốt do có cái col-third rồi
+} */ 
+
+.place-img{
+    display: block; /*ảnh nó có cái vệt đen giữa ảnh và chứ new york do inline*/
+    width: 100%;/*ảnh nằm gọn bên trong màn hình*/
+}
+.place-img:hover{
+    opacity: 0.7;
+}
+.place-body{
+    background-color: #fff;
+    padding: 16px;/*kc chữ và cái viền của khung ảnh*/
+    font-size: 15px;
+    /* min-height: 400px; */
+}
+
+
+
+.place-heading{/*thẻ newyork*//* riêng chữ new có thẻ h2 nên xử lí riêng*/
+    font-size: 15px;
+    font-weight: 600;
+}
+
+.place-time{
+    margin-top: 15px;
+    color: #757575;
+}
+
+.place-dsc{
+    margin-top: 15px;
+    line-height: 1.4;
+}
+
+
+
+
+.modal{
+    position: fixed;
+    top: 0;
+    right: 0;
+    left: 0;
+    bottom: 0;
+    background: rgba(0,0,0,0.4);
+    align-items: center;
+    justify-content: center;
+    display: none;/*none thì nó ẩn đi còn flex hiện lên*/
+}
+.modal-container {
+    background: #fff;
+    width: 900px;/*nếu để 900 thì nếu trình duyệt <900 co lại dính vào */
+    max-width: calc(100% - 32px);/*luôn acshc 2 mps16px*/
+    min-height: 200px;
+    position: relative;/*thêm với dòng 416*/
+    animation: modalFadein ease 0.5s; /*đưa keyframe vào*/
+}
+
+.modal-header {
+    background: #009688;
+    height: 130px;
+    display: flex;/*căn giữa cùng với 2 dòng dưới*/
+    align-items: center;
+    justify-content: center;
+    font-size: 30px;
+    color: #fff;
+}
+
+.modal-heading-icon{ /*chữ ticket cách ảnh ra 1 chút*/
+    margin-right: 16px;
+}
+.modal-close:hover {
+    opacity: 1;
+}
+.modal-close {/*nút x*/
+    position: absolute; /*để dùng cái này thì phỉa xác định thnawgf cha của nó là ai. chígs là cái modal container*/
+    /*dùng cái position để bỏ cái khoảng trắng  ở đầu đi*/
+    right: 0;
+    top: 0;
+    color: #fff;
+    padding: 12px;
+    cursor: pointer;
+    opacity: 0.8;
+}
+
+.modal-body {
+    padding: 16px;
+}
+.modal-label {
+    display: block;/*tính chất cửa block là mỗi cái 1 hàng riêng biệt*/
+    font-size: 15px;
+    margin-bottom: 12px;
+}
+.modal-input {
+    border: 1px solid #ccc;/*viền ngoài*/
+    width: 100%;
+    padding: 11px;
+    font-size: 15px;
+    margin-bottom: 24px;
+}
+#buy-tickets:hover {
+    opacity: 0.9;
+}
+#buy-tickets {
+    background: #009688;
+    border: none;
+    color: #fff;
+    width: 100%;
+    font-size: 15px;
+    text-transform: uppercase;/*chữ đậm hết lên*/
+    padding: 18px;
+    cursor: pointer;
+}
+.modal-footer{
+    padding: 16px;/*cách viền 16px*/
+    text-align: right;
+    
+}
+.modal-footer a{
+    color: #2196F3;
+}
+
+.modal.open{
+    display: flex;
+}
+
+@keyframes modalFadein {
+    from {/*lúc mờ sau đậm thì cho opacity vào*/
+        opacity: 0;
+        transform: translateY(-140px);
+    }
+    to{
+        opacity: 1;
+        transform: translateY(0);
+    }
+} 
+
+/* contact form */
+.contact-content{
+    margin-top: 48px;
+}
+.contact-info a{
+    color: #101aef;
+    opacity: 0.8;
+}
+.contact-info a:hover{
+    opacity: 1.2;
+}
+.contact-info{
+    font-size: 18px;
+    line-height: 1.5;
+}
+.contact-info i[class*="ti-"]{ /*chọn hết class các ti-*/
+    width: 30px;
+    display: inline-block;/*để nó ăn vào cái width =30px*/
+}
+    
+.contact-form{
+    font-size: 15px;
+}
+.contact-form .form-control{
+    padding: 10px;
+    border: 1px solid #ccc;
+    width: 100%;
+}
+
+.map-section img{
+    width: 100%;
+}
+
+#footer{
+    padding: 64px 16px;
+    text-align: center;
+}
+#footer .socials-list{
+    font-size: 24px;
+
+}
+#footer .socials-list a{
+    color: rgba(0,0,0,0.6);
+    text-decoration: none;
+}
+#footer .copyright a:hover,
+#footer .socials-list a:hover{
+    color: rgba(0,0,0,0.4);
+}
+
+#footer .copyright{
+    margin-top: 15px;
+    color: rgba(0,0,0,0.6);
+}
+
+#footer .copyright a{
+    color: rgba(0,0,0,0.6);
+}

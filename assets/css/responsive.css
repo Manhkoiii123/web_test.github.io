@@ -1,0 +1,106 @@
+/* pc */
+@media(min-width : 1024px){
+    
+}
+
+/* tablet */
+
+@media(min-width : 740px)and(max-width : 1023px){
+    .contact-info{
+        line-height: 2;
+    }
+}
+
+/* tablet && mobile  */
+@media(max-width:1023px){
+    /* từ 0 den 1023 */
+    .btn{
+        padding: 15px 16px;
+    }
+    .contact-info{
+        line-height: 2;
+    }
+    
+    .contact-form .form-control{
+        padding: 15px;
+    }
+    #footer .socials-list{
+        font-size: 48px;
+    }
+    #footer .socials-list a{
+        margin: 0 8px;
+    }
+    #footer .copyright a{
+        padding: 12px 0;
+        display: inline-block;
+    }
+}
+
+/*mobile */
+@media(max-width  : 740px){
+    .s-full-width{
+        /* để xử lí cái nút send */
+        width: 100% !important;
+    }
+    .s-mt-8{
+        margin-top: 8px !important;
+    }
+    #nav{/*thấy cái thẻ khi ấn vào cái menu nó ko bao hết 100%
+        tìm display a(có bl) xét cha của a là li (có bl rồi) 
+        xét tiếp cha của li là nav có dis=inli*/ 
+        /*thẻ home cũng ăn theo 100% tìm riêng thẻ home thôi class giả  first child dòng 25*/
+        display: block;
+    } 
+    /* sau khi thêm cái #nav vào thì cái nút menu bị ẩn đi ->ele nằm
+    trên 1 ele khác -> position absolube  */
+    /*xác định cái thẻ cha của mobile menu là headr thấy header có pos rồi
+    thì thêm vào mobile pos là ok --> 206 style.css*/
+    #nav > li:first-child{
+        display: inline-block;
+    }
+    #nav > li{
+        display: block;/*đưa về 1 cột*/
+    }
+    #nav .subnav{
+        position: initial;/*bỏ đi cái po ở trong nav subnav với pc đi*/
+        background-color: #333;/*tìm xem cái nào quyết định màu bg thì sửa ở đây */
+    }
+    #nav .subnav a{
+        color: #fff;
+        padding: 5px 12px;
+    }
+
+    #header .mobile-menu-btn{
+        display: block;
+    }
+    #header {
+        overflow: hidden;/*ẩn cái subnav chỉ ở trên moblie*/
+    }
+    
+    #header .search-btn{
+        display: none; /*ẩn cái nút search đi*/
+    }
+    /* #content .member-item{
+        margin-top: 30px;
+        width: 100%;  
+    } */
+    #content .member-img{ /*độ to của ảnh*/
+        width: 60%;
+    }
+    .s-col-full{/*size s cho cái mobile chỉ ảnh hưởng đến moble đưa 3 ảnh dọc*/
+        width: 100% !important;
+    }
+    .contact-form{
+        margin-top: 32px;
+        
+    }
+    
+
+}
+/* truy cập trên đt
+vào thư mục copy cái đường dẫn vào ngrok
+cmd gõ cd  + đường truyền
+vào cái gg setup ngrok copy cái đường dẫn thứ 2 vào
+ngrok config add-authtoken 2AZUOq4iipGRnRaQ37pK4GuTndL_4nvZahNVJ2Y6djVntxyNb
+xong ấn ngrok http 5500
+lấy link liên kết */
